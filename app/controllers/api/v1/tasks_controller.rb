@@ -2,7 +2,7 @@ class Api::V1::TasksController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    task = current_user.tasks.build(title: params[:title], description: params[:description])
+    task = current_user.tasks.build(title: params[:title], description: params[:description], color: params[:color], status: params[:status])
     if task.save
       render json: task, status: :ok
     else
