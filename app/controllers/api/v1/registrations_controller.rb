@@ -1,36 +1,17 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
-  before_action :ensure_params_exist, only: :create
-
-  def create
-    user = User.new user_params
-    if user.save
-      render json: {
-        messages: "Sign Up Successfully",
-        success: true,
-        data: {
-          user: user
-        }
-      }, status: :ok
-    else
-      render json: {
-        messages: "Sign Up Failded",
-        success: false,
-        data: {}
-      }, status: :unprocessable_entity
-    end
-  end
+  respond_to :json
 
   private
-  def user_params
-    params.require(:user).permit(:email, :password)
+  
+  def respond_with(resource, _opts = {})
+    resource.persisted? ? register_success : register_failed
   end
-
-  def ensure_params_exist
-    return if params[:user].present?
-    render json: {
-        messages: "Missing Params",
-        is_success: false,
-        data: {}
-      }, status: :bad_request
+  
+  def register_success
+    render json: { message: 'Signed up.' }
+  end
+  
+  def register_failed
+    render json: { message: "Signed up failure." }
   end
 end

@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '0fa70c91186f4ad75088056dbc36407aed792c5e85ecc6dbb8d2ce6255dd9b140456bd5641d98c0c0b03e1466020e47ef7b0a8320594b446bb6c76133c378380'
+  config.secret_key = '0fa70c91186f4ad75088056dbc36407aed792c5e85ecc6dbb8d2ce6255dd9b140456bd5641d98c0c0b03e1466020e47ef7b0a8320594b446bb6c76133c378380'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -263,7 +263,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = []
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -304,6 +304,17 @@ Devise.setup do |config|
   # Note: These might become the new default in future versions of Devise.
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
+
+  config.jwt do |jwt|
+    jwt.secret = '0fa70c91186f4ad75088056dbc36407aed792c5e85ecc6dbb8d2ce6255dd9b140456bd5641d98c0c0b03e1466020e47ef7b0a8320594b446bb6c76133c378380'
+    jwt.dispatch_requests = [
+      ['POST', %r{^/sign_in$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/sign_out$}]
+    ]
+    jwt.expiration_time = 30.minutes.to_i
+  end
 
   # ==> Configuration for :registerable
 
