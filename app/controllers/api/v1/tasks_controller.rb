@@ -12,7 +12,7 @@ class Api::V1::TasksController < ApplicationController
 
   def update
     task = current_user.tasks.find(params[:id])
-    if task.update(status: params[:status])
+    if task.update(update_params)
       render json: task, status: :ok
     else
       render json: { errors: task.errors.full_messages }, status: :unprocessable_entity
@@ -31,5 +31,11 @@ class Api::V1::TasksController < ApplicationController
   def index
     tasks = current_user.tasks
     render json: tasks, status: :ok
+  end
+
+  private
+
+  def update_params
+    params.permit(:status, :title, :description, :color)
   end
 end
