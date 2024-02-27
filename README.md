@@ -1,24 +1,10 @@
-# README
+# Task Management Application
+You have to build a task management application. The application will allow users to create, update, and delete tasks. Tasks should have a title, description, and a status (e.g., "To Do," "In Progress," "Done"). Users should also be able to view a list of tasks.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Tech Stack Used:
+  - React.JS
+  - Ruby on Rails
+  - Rspec
+  - Deployed on render.com
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Access URL: https://task-management-frontend-s183.onrender.com/
