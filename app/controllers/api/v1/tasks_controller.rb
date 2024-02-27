@@ -30,7 +30,18 @@ class Api::V1::TasksController < ApplicationController
 
   def index
     tasks = current_user.tasks
-    render json: tasks, status: :ok
+    response = tasks.map do |task|
+      {
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        created_at: task.created_at.strftime('%d-%b-%y'),
+        color: task.color,
+        status: task.status
+      }
+    end
+
+    render json: response, status: :ok
   end
 
   private
